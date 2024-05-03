@@ -1,5 +1,4 @@
 import os
-import tempfile
 import streamlit as st
 import numpy as np
 from PIL import Image, ImageFilter
@@ -64,7 +63,7 @@ def main():
 
         save_path = Path(".", svg_file.name)
         with open(save_path, mode='wb') as w:
-            w.write(File.getvalue())
+            w.write(svg_file.getvalue())
     
         if save_path.exists():
             st.success(f'File {svg_file.name} is successfully saved!')
