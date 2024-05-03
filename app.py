@@ -62,20 +62,18 @@ def main():
 
         temp_dir = tempfile.mkdtemp()
 
-        st.write(temp_dir)
-
         path = os.path.join(temp_dir, svg_file.name)
 
         with open(path, "wb") as f:
 
             f.write(svg_file.getvalue())
         
-            # Convert SVG file to PNG file using ImageMagic
-            subprocess.run(["convert", f.name, "out.png"], shell = True)
+        # Convert SVG file to PNG file using ImageMagic
+        subprocess.call(["convert", f.name, "out.png"], shell = True)
 
-        img = os.path.join(temp_dir, "out.png")
+        img = os.path.join("", "out.png")
 
-        img = Image.open(img)
+        img = Image.open("out.png")
 
         st.image(img, caption = "Original")
 
