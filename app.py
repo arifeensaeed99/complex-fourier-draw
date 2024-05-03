@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import streamlit as st
 import numpy as np
 from PIL import Image, ImageFilter
@@ -9,8 +10,6 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 from stqdm import stqdm
-
-from pathlib import Path
 
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
@@ -69,7 +68,7 @@ def main():
             st.success(f'File {svg_file.name} is successfully saved!')
         
         # Convert SVG file to PNG file using ImageMagick
-        subprocess.call(["convert", svg_file.name, "out.png"]) # shell=True
+        subprocess.call(["convert", svg_file.name, "out.png"], shell=True)
 
         def file_selector(folder_path="."):
             filenames = os.listdir(folder_path)
