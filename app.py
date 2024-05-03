@@ -59,19 +59,11 @@ def main():
     svg_file = st.file_uploader(label = 'Upload:', type='svg')
 
     if  svg_file is not None:
-
-        temp_dir = tempfile.mkdtemp()
-
-        path = os.path.join(temp_dir, svg_file.name)
-
-        with open(path, "wb") as f:
-
-            f.write(svg_file.getvalue())
         
         # Convert SVG file to PNG file using ImageMagic
-        subprocess.call(["convert", f.name, "out.png"], shell = True)
+        subprocess.call(["convert", svg_file.name, "out.png"], shell = True)
 
-        def file_selector(folder_path=temp_dir):
+        def file_selector(folder_path="."):
             filenames = os.listdir(folder_path)
             selected_filename = st.selectbox('Select a file', filenames)
             return os.path.join(folder_path, selected_filename)
@@ -79,9 +71,9 @@ def main():
         filename = file_selector()
         st.write('You selected `%s`' % filename)
 
-        img = os.path.join(temp_dir, "out.png")
+        img = os.path.join(".", "out.png")
 
-        img = Image.open("output.png")
+        img = Image.open("out.png")
 
         st.image(img, caption = "Original")
 
@@ -129,7 +121,7 @@ def main():
 
                 for b in np.arange(start, stop, step):
                     xy_coords, labels = mean_shift(xy_coords, bandwidth = b)
-                    st.write('mean shift,', str(b) + ": " + str(len(xy_coords)))
+                    # st.write('mean shift,', str(b) + ": " + str(len(xy_coords)))
                     if len(xy_coords) <= points:
                         st.success("Mean shift completed!")
                         break
@@ -178,8 +170,7 @@ def main():
                 ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
                 ax.set_xticks([])
                 ax.set_yticks([])
-                # plt.suptitle("Drawn with Complex Fourier Epicycles on Streamlit!")
-                # plt.title("INSERT STREAMLIT URL HERE")
+                plt.suptitle("https://complex-fourier-draw.streamlit.app")
 
                 # epicycles 
                 # (add arrows next)
