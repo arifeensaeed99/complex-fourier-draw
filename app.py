@@ -70,10 +70,10 @@ def main():
 
             f.write(svg_file.getvalue())
         
-        # Convert SVG file to PNG file using ImageMagic
-        subprocess.run(["convert", f.name, "out.png"], shell = True)
+            # Convert SVG file to PNG file using ImageMagic
+            subprocess.run(["convert", f.name, "out.png"], shell = True)
 
-        img = os.path.join(".", "out.png")
+        img = os.path.join(temp_dir, "out.png")
 
         img = Image.open(img)
 
