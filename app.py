@@ -62,9 +62,7 @@ def main():
 
     if  svg_file is not None:
 
-        # Save uploaded file to 'F:/tmp' folder.
-        save_folder = 'F:/tmp'
-        save_path = Path(save_folder, svg_file.name)
+        save_path = Path(".", svg_file.name)
         with open(save_path, mode='wb') as w:
             w.write(File.getvalue())
     
@@ -83,7 +81,7 @@ def main():
 
         img = os.path.join(".", "out.png")
 
-        img = Image.open("out.png")
+        img = Image.open(img)
 
         st.image(img, caption = "Original")
 
