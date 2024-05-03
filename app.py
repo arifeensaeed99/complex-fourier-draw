@@ -60,14 +60,19 @@ def main():
 
     if  svg_file is not None:
 
-        with open(svg_file.name, "wb") as outfile:
-            # Copy the BytesIO stream to the output file
-            outfile.write(myio.getbuffer())
+        # Save uploaded file to 'F:/tmp' folder.
+        save_folder = 'F:/tmp'
+        save_path = Path(save_folder, svg_file.name)
+        with open(save_path, mode='wb') as w:
+            w.write(File.getvalue())
+    
+        if save_path.exists():
+            st.success(f'File {svg_file.name} is successfully saved!')
         
         # Convert SVG file to PNG file using ImageMagick
-        subprocess.call(["convert", outfile, "out.png"]) # shell=True
+        subprocess.call(["convert", svg_file.name, "out.png"]) # shell=True
 
-        def file_selector(folder_path="tmp"):
+        def file_selector(folder_path="."):
             filenames = os.listdir(folder_path)
             selected_filename = st.selectbox('Select a file', filenames)
             return os.path.join(folder_path, selected_filename)
