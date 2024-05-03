@@ -1,5 +1,5 @@
 import os
-from pathlib import Path
+import tempfile
 import streamlit as st
 import numpy as np
 from PIL import Image, ImageFilter
@@ -60,19 +60,20 @@ def main():
 
     if  svg_file is not None:
 
-        save_path = Path(".", svg_file.name)
-        with open(save_path, mode='wb') as w:
-            w.write(svg_file.getvalue())
-    
-        if save_path.exists():
-            st.success(f'File {svg_file.name} is successfully saved!')
+        temp_dir = tempfile.mkdtemp()
+
+        path = os.path.join(temp_dir, svg_file.name)
+
+        with open(path, "wb") as f:
+
+            f.write(svg_file.getvalue())
         
-        # Convert SVG file to PNG file using ImageMagick
-        subprocess.call(["convert", w.name, "out.png"], shell = True)
+        # Convert SVG file to PNG file using ImageMagic
+        subprocess.run(["convert", f.name, "out.png"], shell = True)
 
         img = os.path.join(".", "out.png")
 
-        img = Image.open("out.png")
+        img = Image.open(img)
 
         st.image(img, caption = "Original")
 
