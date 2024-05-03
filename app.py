@@ -59,15 +59,18 @@ def main():
     svg_file = st.file_uploader(label = 'Upload:', type='svg')
 
     if  svg_file is not None:
-        
-        # Convert SVG file to PNG file using ImageMagic
-        subprocess.call(["convert", svg_file.name, "out.png"], shell = True)
 
-        def file_selector(folder_path="."):
+        with open(svg_file.name, "wb") as outfile:
+            # Copy the BytesIO stream to the output file
+            outfile.write(myio.getbuffer())
+        
+        # Convert SVG file to PNG file using ImageMagick
+        subprocess.call(["convert", outfile, "out.png"]) # shell=True
+
+        def file_selector(folder_path="tmp"):
             filenames = os.listdir(folder_path)
             selected_filename = st.selectbox('Select a file', filenames)
             return os.path.join(folder_path, selected_filename)
-        
         filename = file_selector()
         st.write('You selected `%s`' % filename)
 
