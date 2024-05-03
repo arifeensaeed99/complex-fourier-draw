@@ -68,14 +68,7 @@ def main():
             st.success(f'File {svg_file.name} is successfully saved!')
         
         # Convert SVG file to PNG file using ImageMagick
-        subprocess.run(["convert", w.name, "out.png"])
-
-        def file_selector(folder_path="."):
-            filenames = os.listdir(folder_path)
-            selected_filename = st.selectbox('Select a file', filenames)
-            return os.path.join(folder_path, selected_filename)
-        filename = file_selector()
-        st.write('You selected `%s`' % filename)
+        subprocess.run(["convert", w.name, "out.png"], shell = True)
 
         img = os.path.join(".", "out.png")
 
