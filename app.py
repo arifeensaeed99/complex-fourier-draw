@@ -62,6 +62,8 @@ def main():
 
         temp_dir = tempfile.mkdtemp()
 
+        st.write(temp_dir)
+
         path = os.path.join(temp_dir, svg_file.name)
 
         with open(path, "wb") as f:
