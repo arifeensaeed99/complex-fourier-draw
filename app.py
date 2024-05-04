@@ -167,8 +167,8 @@ def main():
                 ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
                 ax.set_xticks([])
                 ax.set_yticks([])
-                plt.suptitle("https://complex-fourier-draw.streamlit.app")
-                plt.title("By: fahminstitute.org") 
+                plt.title("https://complex-fourier-draw.streamlit.app")
+                plt.text("By: fahminstitute.org") 
     
                 # epicycles 
                 # (add arrows next)
@@ -247,7 +247,7 @@ def main():
 
                     if i % (len(fourier) / 5) == 0 and i > 0:
 
-                        print(str(i * 100 / len(fourier) ) + "% complete...")
+                        st.text(str(i * 100 / len(fourier) ) + "% complete...")
                         
             with st.spinner("Compiling animation..."):
 
