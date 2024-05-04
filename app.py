@@ -59,10 +59,15 @@ def main():
 
     if svg_file is not None:
 
+        bytes_data = svg_file.read()
+        st.write(bytes_data, svg_file.name)
+        with open(os.path.join(".", svg_file.name), "wb") as f:
+            f.write(bytes_data)
+
         doc = aw.Document()
         builder = aw.DocumentBuilder(doc)
         
-        shape = builder.insert_image(svg_file.name)
+        shape = builder.insert_image(f)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
         
         img = Image.open("out.png")
