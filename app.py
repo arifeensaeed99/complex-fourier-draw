@@ -62,6 +62,8 @@ def main():
         with tempfile.NamedTemporaryFile(delete=False) as temp_file:
             temp_file.write(uploaded_file.read())
             temp_file.seek(0)
+
+            print(temp_file, temp_file.name)
     
             # Convert SVG file to PNG file using ImageMagick
             subprocess.run(['convert', temp_file.name, 'out.png'])
