@@ -8,10 +8,14 @@ from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 from stqdm import stqdm
 
+import aspose.words as aw
+
+"""
 import subprocess
 import os
 import tempfile
 from wand.image import Image as wand_image
+"""
 
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
@@ -67,12 +71,19 @@ def main():
             temp_file.seek(0)
 
         print(temp_file, temp_file.name)
-        """
 
         with wand_image( filename = svg_file.name ) as png:
             png.format = 'png'
             png.save(filename='out.png')
+
+        """
+
+        doc = aw.Document()
+        builder = aw.DocumentBuilder(doc)
         
+        shape = builder.insert_image(svg_file)
+        shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
+            
         img = Image.open('out.png')
 
         st.image(img, caption='Uploaded')
