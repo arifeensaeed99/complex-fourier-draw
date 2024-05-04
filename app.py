@@ -66,6 +66,8 @@ def main():
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
         st.write(svg_file, svg_file.name)
+
+        st.write(os.getcwd())
         
         img = Image.open("out.png")
 
