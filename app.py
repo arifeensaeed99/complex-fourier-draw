@@ -283,7 +283,7 @@ def main():
     st.caption("")
     st.caption("")
     st.caption("Fahm Institute © 2024")
-    st.caption("-Arifeen S.")
+    st.caption("*-Arifeen S.*")
     
 if __name__ == '__main__':
     main()
