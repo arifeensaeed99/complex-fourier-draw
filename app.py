@@ -10,7 +10,6 @@ from stqdm import stqdm
 
 import aspose.words as aw
 import os
-
 """
 import subprocess
 import os
@@ -83,17 +82,12 @@ def main():
         builder = aw.DocumentBuilder(doc)
         
         shape = builder.insert_image(svg_file)
+        
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
-        def file_selector(folder_path='.'):
-            filenames = os.listdir(folder_path)
-            selected_filename = st.selectbox('Select a file', filenames)
-            return os.path.join(folder_path, selected_filename)
+        path = os.path.join(".", "out.png")
         
-        filename = file_selector()
-        st.write('You selected `%s`' % filename)
-
-        img = Image.open("out.png")
+        img = Image.open(path)
 
         st.image(img, caption='Uploaded')
 
