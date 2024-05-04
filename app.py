@@ -1,7 +1,9 @@
 import streamlit as st
 import numpy as np
 import aspose.words as aw
+from io import BytesIO
 import os
+import sys
 from PIL import Image, ImageFilter, ImageFile
 import matplotlib.pyplot as plt
 import pprint
@@ -64,7 +66,6 @@ def main():
         shape = builder.insert_image(svg_file)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
-        from io import BytesIO
         ImageFile.LOAD_TRUNCATED_IMAGES = True
         path = 'out.png'
         with open(path, 'rb') as fp:
@@ -199,80 +200,87 @@ def main():
 
                 # corrected epicycle alignment
 
-                for i in stqdm(range(len(fourier))):
-                
-                    t = i * (2 * np.pi / len(fourier))
+                try:
+    
+                    for i in stqdm(range(len(fourier))):
                     
-                    for idx in range(len(fourier)-1):        
-
-                        if idx == 0:
-                            
-                            radius = fourier[0]['amp']
-
-                            freq = fourier[0]['freq']
-
-                            phase = fourier[0]['phase']
-
-                            x = radius * np.cos(t * freq + phase)
-
-                            y = radius * np.sin(t * freq + phase)
-
-                            patches[0].center = (x, y)
-
-                        else:
-
-                            prev_x, prev_y = patches[idx].center
-
-                            radius = fourier[idx]['amp']
-
-                            freq = fourier[idx]['freq']
-
-                            phase = fourier[idx]['phase']
-
-                            x = prev_x + radius * np.cos(t * freq + phase)
-
-                            y = prev_y + radius * np.sin(t * freq + phase)
-
-                            patches[idx + 1].center = (x, y)
-
-                    # add values to x and y holders of final patch for drawing
+                        t = i * (2 * np.pi / len(fourier))
                         
-                    xdata.append( x )
+                        for idx in range(len(fourier)-1):        
+    
+                            if idx == 0:
+                                
+                                radius = fourier[0]['amp']
+    
+                                freq = fourier[0]['freq']
+    
+                                phase = fourier[0]['phase']
+    
+                                x = radius * np.cos(t * freq + phase)
+    
+                                y = radius * np.sin(t * freq + phase)
+    
+                                patches[0].center = (x, y)
+    
+                            else:
+    
+                                prev_x, prev_y = patches[idx].center
+    
+                                radius = fourier[idx]['amp']
+    
+                                freq = fourier[idx]['freq']
+    
+                                phase = fourier[idx]['phase']
+    
+                                x = prev_x + radius * np.cos(t * freq + phase)
+    
+                                y = prev_y + radius * np.sin(t * freq + phase)
+    
+                                patches[idx + 1].center = (x, y)
+    
+                        # add values to x and y holders of final patch for drawing
+                            
+                        xdata.append( x )
+    
+                        ydata.append( y )
+    
+                        line.set_data(xdata, ydata)
+                        
+                        fig.savefig(str(i) + '.png')
 
-                    ydata.append( y )
+                except (BrokenPipeError, IOError):
+                    pass
 
-                    line.set_data(xdata, ydata)
+                sys.stderr.close()
+
+                with st.spinner("Compiling animation..."):
+
+                    images = []
+                    for i in range(len(fourier)):
+                        
+                        exec('a'+str(i)+'=Image.open("'+str(i)+'.png")')
+                        images.append(eval('a'+str(i)))
                     
-                    fig.savefig(str(i) + '.png')
+                    images[0].save('output.gif',
+                                save_all = True,
+                                append_images = images[1:],
+                                duration = 120,
+                                loop = 1)
+    
+                    st.balloons()
+                    st.success("Animation ready! 😊")
+    
+                    st.caption("(right click to download the gif)")
 
-            with st.spinner("Compiling animation..."):
-
-                images = []
+                # removing temp files
                 for i in range(len(fourier)):
                     
-                    exec('a'+str(i)+'=Image.open("'+str(i)+'.png")')
-                    images.append(eval('a'+str(i)))
+                    os.remove(str(i)+'.png')
                 
-                images[0].save('output.gif',
-                            save_all = True,
-                            append_images = images[1:],
-                            duration = 120,
-                            loop = 1)
-
-                st.balloons()
-                st.success("Animation ready! 😊")
-
-                st.caption("(right click to download the gif)")
-
-            # removing temp files
-            for i in range(len(fourier)):
-                
-                os.remove(str(i)+'.png')
-            
-            # show gif
-            st.image('output.gif')
-
-            st.caption("If gif is too slow, speed up here: https://onlinegiftools.com/make-gif-faster")
+                # show gif
+                st.image('output.gif')
+    
+                st.caption("If gif is too slow, speed up here: https://onlinegiftools.com/make-gif-faster")
 
     st.caption("")
     st.caption("")
