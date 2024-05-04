@@ -63,11 +63,11 @@ def main():
         doc = aw.Document()
         builder = aw.DocumentBuilder(doc)
         shape = builder.insert_image(svg_file)
-        shape.get_shape_renderer().save("out.jpeg", aw.saving.ImageSaveOptions(aw.SaveFormat.jpeg))
+        shape.get_shape_renderer().save("out.jpg", aw.saving.ImageSaveOptions(aw.SaveFormat.JPG))
 
-        img = Image.open('out.jpeg')
+        img = Image.open('out.jpg')
 
-        st.write(os.stats("out.jpeg"))
+        st.write(os.stats("out.jpg"))
         
         st.image(img, caption = "Uploaded")
 
