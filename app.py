@@ -93,9 +93,9 @@ def main():
         filename = file_selector()
         st.write('You selected `%s`' % filename)
 
-        path = os.join(".", "out.png")
-
         st.image("out.png")
+        
+        path = os.join(".", "out.png")
 
         img = Image.open(path)
 
