@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import aspose.words as aw
+import tempfile
 import os
 from PIL import Image, ImageFilter
 import matplotlib.pyplot as plt
@@ -58,23 +59,16 @@ def main():
     svg_file = st.file_uploader("Upload:", type=["svg"])
 
     if svg_file is not None:
-
-        bytes_data = svg_file.read()
-        st.write(bytes_data, svg_file.name)
-        with open(os.path.join(".", svg_file.name), "wb") as f:
-            f.write(bytes_data)
-
+        
         doc = aw.Document()
         builder = aw.DocumentBuilder(doc)
         
-        shape = builder.insert_image(f.name)
+        shape = builder.insert_image(svg_file)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
         st.write(os.stat("out.png"))
-
-        path = os.path.join(".", "out.png")
         
-        img = Image.open(path)
+        img = Image.open("out.png")
 
         st.image(img, caption='Uploaded')
 
