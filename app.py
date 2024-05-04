@@ -11,7 +11,7 @@ from stqdm import stqdm
 import subprocess
 import os
 import tempfile
-from wand.image Import Image as wand_image
+from wand.image import Image as wand_image
 
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
