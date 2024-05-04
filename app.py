@@ -56,24 +56,24 @@ def main():
 
     st.info("Then, upload your SVG:")
 
-    svg_file = st.file_uploader(label = 'Upload:', type='svg')
+    uploaded_file = st.file_uploader("Upload:", type=["svg"])
 
-    if  svg_file is not None:
-
-        temp_dir = tempfile.mkdtemp()
-
-        path = os.path.join(temp_dir, svg_file.name)
-
-        with open(path, "wb") as f:
-
-            f.write(svg_file.getvalue())
-        
-        # Convert SVG file to PNG file using ImageMagic
-        subprocess.run( ' convert ' + str( svg_file.name ) +  ' out.png ')
-
-        img = os.path.join(".", "out.png")
-
-        img = Image.open("out.png")
+    if uploaded_file is not None:
+        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            temp_file.write(uploaded_file.read())
+            temp_file.seek(0)
+    
+            # Convert SVG file to PNG file using ImageMagick
+            subprocess.run(['convert', temp_file.name, 'out.png'])
+    
+            img_path = 'out.png'
+            img = Image.open(img_path)
+    
+            st.image(img, caption='Uploaded SVG Image')
+    
+        # Optionally, you can remove the temporary file after usage
+        if os.path.exists('out.png'):
+            os.remove('out.png')
 
         st.image(img, caption = "Original")
 
@@ -90,17 +90,18 @@ def main():
 
         st.info("Now, imagine you were about to hand-draw the image. To properly draw it, how much time would you need?")
 
-        complexity = st.radio(label = "Time:", options=['Low', "Medium", 'High'], index = 1 )
+        complexity = st.radio(label = "Difficulty:", options=['Low', "Medium", 'High'], index = 1 )
         st.caption("*If unsure, leave as Medium*")
         
         if st.button("Let's draw using math!"):
 
             with st.spinner("Computing..."):
+                
                 # extract path coordinates
                 xy_coords = np.flip(np.column_stack(np.where(np.array(img) < 10)), axis = 0)
                 # print(xy_coords, len(xy_coords))
 
-                # Mean Shift with detailedness
+                # Mean Shift
                 if complexity == 'Low':
                     start = 3
                     stop = 5
