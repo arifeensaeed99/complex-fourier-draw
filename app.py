@@ -93,7 +93,7 @@ def main():
         filename = file_selector()
         st.write('You selected `%s`' % filename)
 
-        st.image("out.png")
+        st.image("./out.png")
         
         path = os.join(".", "out.png")
 
