@@ -55,7 +55,9 @@ def main():
 
     st.info("Then, upload your SVG:")
 
-    os.chdir("/mount/src/complex-fourier-draw/tmp/")
+    os.mkdir("/mount/src/complex-fourier-draw/tmp")
+
+    os.chdir("/mount/src/complex-fourier-draw/tmp")
 
     svg_file = st.file_uploader("Upload:", type=["svg"])
 
