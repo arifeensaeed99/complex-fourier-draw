@@ -55,18 +55,14 @@ def main():
 
     st.info("Then, upload your SVG:")
 
-    os.mkdir("/mount/src/complex-fourier-draw/tmp")
-
-    os.chdir("/mount/src/complex-fourier-draw/tmp")
-
     svg_file = st.file_uploader("Upload:", type=["svg"])
 
     if svg_file is not None:
-        
+
         doc = aw.Document()
         builder = aw.DocumentBuilder(doc)
         
-        shape = builder.insert_image(svg_file)
+        shape = builder.insert_image(svg_file.read())
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
         
         img = Image.open("out.png")
