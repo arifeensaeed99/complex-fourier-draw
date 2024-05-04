@@ -70,10 +70,8 @@ def main():
         with open(path, 'rb') as fp:
             image_data = fp.read()
             bio = BytesIO(image_data)
-            unsized_image = Image.open(bio)
-                
-        img = Image.open(unsized_image)
-        
+            img = Image.open(bio)
+            
         st.image(img, caption = "Uploaded")
 
         # preprocessing
