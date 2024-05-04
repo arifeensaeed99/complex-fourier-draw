@@ -69,8 +69,10 @@ def main():
         
         shape = builder.insert_image(f.name)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
+
+        path = os.path.join(".", "out.png")
         
-        img = Image.open("out.png")
+        img = Image.open(path)
 
         st.image(img, caption='Uploaded')
 
