@@ -235,10 +235,6 @@ def main():
 
                         patches[idx + 1].center = (x, y)
 
-                #progress
-
-                progress_bar.progress(i, "Creating animation...")
-
                 # add values to x and y holders of final patch for drawing
                     
                 xdata.append( x )
@@ -248,6 +244,12 @@ def main():
                 line.set_data(xdata, ydata)
                 
                 fig.savefig(str(i) + '.png')
+
+                #progress
+
+                progress_bar.progress(i, "Creating animation...")
+
+            progress_bar.empty()
 
             with st.spinner("Compiling animation..."):
 
