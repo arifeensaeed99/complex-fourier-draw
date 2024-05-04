@@ -64,6 +64,8 @@ def main():
         
         shape = builder.insert_image(svg_file)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
+
+        print(svg_file, svg_file.name)
         
         img = Image.open("out.png")
 
