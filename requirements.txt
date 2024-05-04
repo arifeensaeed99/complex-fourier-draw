@@ -1,9 +1,9 @@
 streamlit==1.25.0
 numpy==1.24.4
 Pillow==9.5.0
-ImageMagic==0.2.1
 matplotlib==3.7.2
 fast-tsp==0.1.2
 scikit-learn==1.3.0
 stqdm==0.0.5
 Wand==0.6.13
+magickwand==0.2
