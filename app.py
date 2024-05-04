@@ -10,12 +10,6 @@ from stqdm import stqdm
 
 import aspose.words as aw
 import os
-"""
-import subprocess
-import os
-import tempfile
-from wand.image import Image as wand_image
-"""
 
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
@@ -65,25 +59,12 @@ def main():
     svg_file = st.file_uploader("Upload:", type=["svg"])
 
     if svg_file is not None:
-        """
-        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-            temp_file.write(svg_file.read())
-            temp_file.seek(0)
-
-        print(temp_file, temp_file.name)
-
-        with wand_image( filename = svg_file.name ) as png:
-            png.format = 'png'
-            png.save(filename='out.png')
-
-        """
-
+        
         doc = aw.Document()
         builder = aw.DocumentBuilder(doc)
         
         shape = builder.insert_image(svg_file)
-        
-        shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
+        shape.get_shape_renderer().save("./out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
         path = os.path.join(".", "out.png")
         
