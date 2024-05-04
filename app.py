@@ -1,5 +1,7 @@
 import streamlit as st
 import numpy as np
+import aspose.words as aw
+import os
 from PIL import Image, ImageFilter
 import matplotlib.pyplot as plt
 import pprint
@@ -7,9 +9,6 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 from stqdm import stqdm
-
-import aspose.words as aw
-import os
 
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
@@ -64,11 +63,9 @@ def main():
         builder = aw.DocumentBuilder(doc)
         
         shape = builder.insert_image(svg_file)
-        shape.get_shape_renderer().save("./out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
-
-        path = os.path.join(".", "out.png")
+        shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
         
-        img = Image.open(path)
+        img = Image.open("out.png")
 
         st.image(img, caption='Uploaded')
 
