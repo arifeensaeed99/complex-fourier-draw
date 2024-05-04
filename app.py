@@ -62,7 +62,7 @@ def main():
         doc = aw.Document()
         builder = aw.DocumentBuilder(doc)
         
-        shape = builder.insert_image(svg_file.read())
+        shape = builder.insert_image(svg_file.name)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
         
         img = Image.open("out.png")
