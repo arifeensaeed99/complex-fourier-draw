@@ -251,8 +251,6 @@ def main():
                 except (BrokenPipeError, IOError):
                     pass
 
-                sys.stderr.close()
-
                 with st.spinner("Compiling animation..."):
 
                     images = []
