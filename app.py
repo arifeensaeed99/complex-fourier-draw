@@ -158,95 +158,96 @@ def main():
 
             st.info("Finally, wait for your animation. This will take some time, but it will be worth it! ⭐")
 
-            with st.spinner("Creating animation..."):
+            # progress bar
+
+            progress_bar = st.progress(0, "Creating animation...")
   
-                # blank window
-                fig = plt.figure()
-                fig.set_dpi(100)
-                fig.set_size_inches(8, 8)
-                ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
-                ax.set_xticks([])
-                ax.set_yticks([])
-                plt.suptitle("https://complex-fourier-draw.streamlit.app")
-                plt.title("By: fahminstitute.org") 
-    
-                # epicycles 
-                # (add arrows next)
-    
-                # initialize
-                patches = []
-                for i in range(len(fourier)):
-                    patches.append(plt.Circle((0, 0), fourier[i]['amp'], fill = False))
-    
-                # final drawing line
-                line, = ax.plot([], [], lw = 2)
-                patches.append(line) # important
+            # blank window
+            fig = plt.figure()
+            fig.set_dpi(100)
+            fig.set_size_inches(8, 8)
+            ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
+            ax.set_xticks([])
+            ax.set_yticks([])
+            plt.suptitle("https://complex-fourier-draw.streamlit.app")
+            plt.title("By: fahminstitute.org") 
 
-                def init():
-                    for p in patches[:-1]:
-                        ax.add_artist(p)
-                    line.set_data([], [])
-                    return patches
-    
-                # init empty values for x and y coordinates for final drawing line
-                xdata, ydata = [], []
+            # epicycles 
+            # (add arrows next)
 
-                init()
+            # initialize
+            patches = []
+            for i in range(len(fourier)):
+                patches.append(plt.Circle((0, 0), fourier[i]['amp'], fill = False))
 
-                # animation
-    
-                # corrected epicycle alignment
+            # final drawing line
+            line, = ax.plot([], [], lw = 2)
+            patches.append(line) # important
 
-                for i in range(len(fourier)):
+            def init():
+                for p in patches[:-1]:
+                    ax.add_artist(p)
+                line.set_data([], [])
+                return patches
+
+            # init empty values for x and y coordinates for final drawing line
+            xdata, ydata = [], []
+
+            init()
+
+            # animation
+
+            # corrected epicycle alignment
+
+            for i in range(len(fourier)):
+            
+                t = i * (2 * np.pi / len(fourier))
                 
-                    t = i * (2 * np.pi / len(fourier))
-                    
-                    for idx in range(len(fourier)-1):        
+                for idx in range(len(fourier)-1):        
 
-                        if idx == 0:
-                            
-                            radius = fourier[0]['amp']
-
-                            freq = fourier[0]['freq']
-
-                            phase = fourier[0]['phase']
-
-                            x = radius * np.cos(t * freq + phase)
-
-                            y = radius * np.sin(t * freq + phase)
-
-                            patches[0].center = (x, y)
-
-                        else:
-
-                            prev_x, prev_y = patches[idx].center
-
-                            radius = fourier[idx]['amp']
-
-                            freq = fourier[idx]['freq']
-
-                            phase = fourier[idx]['phase']
-
-                            x = prev_x + radius * np.cos(t * freq + phase)
-
-                            y = prev_y + radius * np.sin(t * freq + phase)
-
-                            patches[idx + 1].center = (x, y)
-
-                    # print progress
-
-                    if i % (len(fourier)/5) == 0 and i > 0:
-                        st.write( str (( i / len(fourier) ) * 100 ) + "% done...")
-
-                    # add values to x and y holders of final patch for drawing
+                    if idx == 0:
                         
-                    xdata.append( x )
+                        radius = fourier[0]['amp']
 
-                    ydata.append( y )
+                        freq = fourier[0]['freq']
 
-                    line.set_data(xdata, ydata)
+                        phase = fourier[0]['phase']
+
+                        x = radius * np.cos(t * freq + phase)
+
+                        y = radius * np.sin(t * freq + phase)
+
+                        patches[0].center = (x, y)
+
+                    else:
+
+                        prev_x, prev_y = patches[idx].center
+
+                        radius = fourier[idx]['amp']
+
+                        freq = fourier[idx]['freq']
+
+                        phase = fourier[idx]['phase']
+
+                        x = prev_x + radius * np.cos(t * freq + phase)
+
+                        y = prev_y + radius * np.sin(t * freq + phase)
+
+                        patches[idx + 1].center = (x, y)
+
+                #progress
+
+                progress_bar.progress(i, "Creating animation...")
+
+                # add values to x and y holders of final patch for drawing
                     
-                    fig.savefig(str(i) + '.png')
+                xdata.append( x )
+
+                ydata.append( y )
+
+                line.set_data(xdata, ydata)
+                
+                fig.savefig(str(i) + '.png')
 
             with st.spinner("Compiling animation..."):
 
