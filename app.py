@@ -55,6 +55,8 @@ def main():
 
     st.info("Then, upload your SVG:")
 
+    os.chdir("/mount/src/complex-fourier-draw/tmp/")
+
     svg_file = st.file_uploader("Upload:", type=["svg"])
 
     if svg_file is not None:
@@ -64,8 +66,6 @@ def main():
         
         shape = builder.insert_image(svg_file)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
-
-        os.chdir("/mount/src/complex-fourier-draw/")
         
         img = Image.open("out.png")
 
