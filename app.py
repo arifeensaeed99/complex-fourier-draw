@@ -93,11 +93,7 @@ def main():
         filename = file_selector()
         st.write('You selected `%s`' % filename)
 
-        st.image("./out.png")
-        
-        path = os.join(".", "out.png")
-
-        img = Image.open(path)
+        img = Image.open("./out.png")
 
         st.image(img, caption='Uploaded')
 
