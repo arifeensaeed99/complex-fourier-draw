@@ -57,19 +57,22 @@ def main():
 
     st.info("Then, upload your SVG:")
 
-    uploaded_file = st.file_uploader("Upload:", type=["svg"])
+    svg_file = st.file_uploader("Upload:", type=["svg"])
 
     if uploaded_file is not None:
+        """
         with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-            temp_file.write(uploaded_file.read())
+            temp_file.write(svg_file.read())
             temp_file.seek(0)
 
         print(temp_file, temp_file.name)
+        """
 
-        with wand.image.Image( blob=temp_file.read(), format="svg" ) as image:
-            png_image = image.make_blob("png")
+        with wand.image.Image( filename = svg_file.name ) as png:
+            png.format = 'png'
+            png.save(filename='out.png')
         
-        img = Image.open(png_image)
+        img = Image.open('out.png')
 
         st.image(img, caption='Uploaded')
 
