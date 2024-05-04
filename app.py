@@ -10,7 +10,7 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 from stqdm import stqdm
-import wand.api import library
+import wand.image
 
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
