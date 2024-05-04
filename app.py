@@ -1,9 +1,8 @@
 import streamlit as st
 import numpy as np
 import aspose.words as aw
-import tempfile
 import os
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageFile
 import matplotlib.pyplot as plt
 import pprint
 import fast_tsp
@@ -65,9 +64,15 @@ def main():
         shape = builder.insert_image(svg_file)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
-        st.write(os.stat("out.png"))
-        
-        img = Image.open('out.png')
+        from io import BytesIO
+        ImageFile.LOAD_TRUNCATED_IMAGES = True
+        path = 'out.png'
+        with open(path, 'rb') as fp:
+            image_data = fp.read()
+            bio = BytesIO(image_data)
+            unsized_image = Image.open(bio)
+                
+        img = Image.open(unsized_image)
         
         st.image(img, caption = "Uploaded")
 
