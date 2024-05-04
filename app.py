@@ -65,9 +65,17 @@ def main():
         shape = builder.insert_image(svg_file)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
-        st.write(svg_file, svg_file.name)
-
-        st.write(os.getcwd())
+        pythonfile = 'output.png'
+ 
+        # if the file is present in current directory,
+        # then no need to specify the whole location
+        st.write("Path of the file..", os.path.abspath(pythonfile))
+        for root, dirs, files in os.walk("."):
+            for name in files:
+                  # As we need to get the provided python file, 
+                # comparing here like this
+                if name == pythonfile:  
+                    st.write(os.path.abspath(os.path.join(root, name)))
         
         img = Image.open("out.png")
 
