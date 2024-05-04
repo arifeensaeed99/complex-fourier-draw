@@ -65,7 +65,7 @@ def main():
         shape = builder.insert_image(svg_file)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
-        st.image("out.png", caption='Uploaded')
+        st.image('out.png')
 
         # preprocessing
 
