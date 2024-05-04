@@ -9,6 +9,7 @@ from sklearn.metrics import pairwise_distances
 from stqdm import stqdm
 
 import aspose.words as aw
+import os
 
 """
 import subprocess
