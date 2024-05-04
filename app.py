@@ -60,7 +60,7 @@ def main():
 
     svg_file = st.file_uploader("Upload:", type=["svg"])
 
-    if uploaded_file is not None:
+    if svg_file is not None:
         """
         with tempfile.NamedTemporaryFile(delete=False) as temp_file:
             temp_file.write(svg_file.read())
