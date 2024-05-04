@@ -9,7 +9,6 @@ import pprint
 import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
-from stqdm import stqdm
 
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
@@ -168,7 +167,8 @@ def main():
                 ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
                 ax.set_xticks([])
                 ax.set_yticks([])
-                plt.suptitle("https://complex-fourier-draw.streamlit.app")
+                plt.suptitle("App: https://complex-fourier-draw.streamlit.app")
+                plt.title("By: http://www.fahminstitute.org") 
     
                 # epicycles 
                 # (add arrows next)
@@ -194,8 +194,6 @@ def main():
                 init()
 
                 # animation
-    
-                # with progress bar
     
                 # corrected epicycle alignment
 
@@ -235,6 +233,11 @@ def main():
 
                             patches[idx + 1].center = (x, y)
 
+                    # print progress
+
+                    if i % (len(fourier)/5) == 0:
+                        st.write( str (( i / len(fourier) ) * 100 ) + " % done...")
+
                     # add values to x and y holders of final patch for drawing
                         
                     xdata.append( x )
@@ -272,14 +275,15 @@ def main():
             # show gif
             st.image('output.gif')
 
-            st.caption("If gif is too slow, speed up here: https://onlinegiftools.com/make-gif-faster")
+            st.caption("Use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
     st.caption("")
     st.caption("")
     st.caption("")
     st.caption("")
     st.caption("")
-    st.caption("By: Arifeen Saeed")
-
+    st.caption("Fahm Institute © 2024")
+    st.caption("-Arifeen S.")
+    
 if __name__ == '__main__':
     main()
