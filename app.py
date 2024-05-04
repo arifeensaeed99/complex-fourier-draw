@@ -33,8 +33,8 @@ def main():
         t is the time, which ranges from 0 to 2pi
                 
         If we connect all epicycles from tip-to-tip at their initial conditions,
-                as all epicycles of various amplitudes rotate at their respective frequencies,
-                the smallest epicycle effectively "draws" the image
+                as all epicycles of various amplitudes rotate at their frequencies,
+                the last epicycle effectively "draws" the image
         """)
 
         st.caption("""
