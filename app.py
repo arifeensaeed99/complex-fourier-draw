@@ -3,7 +3,6 @@ import numpy as np
 import aspose.words as aw
 from io import BytesIO
 import os
-import sys
 from PIL import Image, ImageFilter, ImageFile
 import matplotlib.pyplot as plt
 import pprint
@@ -160,49 +159,47 @@ def main():
 
             st.info("Finally, wait for your animation. This will take some time, but it will be worth it! ⭐")
 
-            # with st.spinner("Creating animation..."):
+            with st.spinner("Creating animation..."):
   
-            # blank window
-            fig = plt.figure()
-            fig.set_dpi(100)
-            fig.set_size_inches(8, 8)
-            ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
-            ax.set_xticks([])
-            ax.set_yticks([])
-            plt.suptitle("https://complex-fourier-draw.streamlit.app")
+                # blank window
+                fig = plt.figure()
+                fig.set_dpi(100)
+                fig.set_size_inches(8, 8)
+                ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
+                ax.set_xticks([])
+                ax.set_yticks([])
+                plt.suptitle("https://complex-fourier-draw.streamlit.app")
+    
+                # epicycles 
+                # (add arrows next)
+    
+                # initialize
+                patches = []
+                for i in range(len(fourier)):
+                    patches.append(plt.Circle((0, 0), fourier[i]['amp'], fill = False))
+    
+                # final drawing line
+                line, = ax.plot([], [], lw = 2)
+                patches.append(line) # important
 
-            # epicycles 
-            # (add arrows next)
+                def init():
+                    for p in patches[:-1]:
+                        ax.add_artist(p)
+                    line.set_data([], [])
+                    return patches
+    
+                # init empty values for x and y coordinates for final drawing line
+                xdata, ydata = [], []
 
-            # initialize
-            patches = []
-            for i in range(len(fourier)):
-                patches.append(plt.Circle((0, 0), fourier[i]['amp'], fill = False))
+                init()
 
-            # final drawing line
-            line, = ax.plot([], [], lw = 2)
-            patches.append(line) # important
+                # animation
+    
+                # with progress bar
+    
+                # corrected epicycle alignment
 
-            def init():
-                for p in patches[:-1]:
-                    ax.add_artist(p)
-                line.set_data([], [])
-                return patches
-
-            # init empty values for x and y coordinates for final drawing line
-            xdata, ydata = [], []
-
-            init()
-
-            # animation
-
-            # with progress bar
-
-            # corrected epicycle alignment
-
-            try:
-
-                for i in stqdm(range(len(fourier))):
+                for i in range(len(fourier)):
                 
                     t = i * (2 * np.pi / len(fourier))
                     
@@ -247,9 +244,6 @@ def main():
                     line.set_data(xdata, ydata)
                     
                     fig.savefig(str(i) + '.png')
-
-            except (BrokenPipeError, IOError):
-                pass
 
             with st.spinner("Compiling animation..."):
 
