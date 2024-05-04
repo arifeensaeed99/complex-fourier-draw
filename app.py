@@ -167,8 +167,8 @@ def main():
                 ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
                 ax.set_xticks([])
                 ax.set_yticks([])
-                plt.suptitle("App: https://complex-fourier-draw.streamlit.app")
-                plt.title("By: http://www.fahminstitute.org") 
+                plt.suptitle("https://complex-fourier-draw.streamlit.app")
+                plt.title("By: fahminstitute.org") 
     
                 # epicycles 
                 # (add arrows next)
@@ -235,8 +235,8 @@ def main():
 
                     # print progress
 
-                    if i % (len(fourier)/5) == 0:
-                        st.write( str (( i / len(fourier) ) * 100 ) + " % done...")
+                    if i % (len(fourier)/5) == 0 and i > 0:
+                        st.write( str (( i / len(fourier) ) * 100 ) + "% done...")
 
                     # add values to x and y holders of final patch for drawing
                         
@@ -275,7 +275,7 @@ def main():
             # show gif
             st.image('output.gif')
 
-            st.caption("Use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
+            st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
     st.caption("")
     st.caption("")
