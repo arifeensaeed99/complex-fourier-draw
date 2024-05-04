@@ -10,6 +10,7 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 from stqdm import stqdm
+import wand.api import library
 
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
@@ -63,21 +64,14 @@ def main():
             temp_file.write(uploaded_file.read())
             temp_file.seek(0)
 
-            print(temp_file, temp_file.name)
-    
-            # Convert SVG file to PNG file using ImageMagick
-            subprocess.run(['nbconvert', temp_file.name, 'out.png'])
-    
-            img_path = 'out.png'
-            img = Image.open(img_path)
-    
-            st.image(img, caption='Uploaded SVG Image')
-    
-        # Optionally, you can remove the temporary file after usage
-        if os.path.exists('out.png'):
-            os.remove('out.png')
+        print(temp_file, temp_file.name)
 
-        st.image(img, caption = "Original")
+        with wand.image.Image( blob=temp_file.read(), format="svg" ) as image:
+            png_image = image.make_blob("png")
+        
+        img = Image.open(png_image)
+
+        st.image(img, caption='Uploaded')
 
         # preprocessing
 
