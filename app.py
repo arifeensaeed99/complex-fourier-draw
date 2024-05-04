@@ -77,7 +77,7 @@ def main():
                 if name == pythonfile:  
                     st.write(os.path.abspath(os.path.join(root, name)))
         
-        img = Image.open("/mount/src/complex-fourier-draw/out.png")
+        img = Image.open(r"/mount/src/complex-fourier-draw/out.png")
 
         st.image(img, caption='Uploaded')
 
