@@ -66,7 +66,7 @@ def main():
             print(temp_file, temp_file.name)
     
             # Convert SVG file to PNG file using ImageMagick
-            subprocess.run(['convert', temp_file.name, 'out.png'])
+            subprocess.run(['nbconvert', temp_file.name, 'out.png'])
     
             img_path = 'out.png'
             img = Image.open(img_path)
