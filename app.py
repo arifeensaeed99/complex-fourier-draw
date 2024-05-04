@@ -1,16 +1,17 @@
-import os
-import tempfile
 import streamlit as st
 import numpy as np
 from PIL import Image, ImageFilter
-import subprocess
 import matplotlib.pyplot as plt
 import pprint
 import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 from stqdm import stqdm
-import wand.image
+
+import subprocess
+import os
+import tempfile
+from wand.image Import Image as wand_image
 
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
@@ -68,7 +69,7 @@ def main():
         print(temp_file, temp_file.name)
         """
 
-        with wand.image.Image( filename = svg_file.name ) as png:
+        with wand_image( filename = svg_file.name ) as png:
             png.format = 'png'
             png.save(filename='out.png')
         
