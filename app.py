@@ -70,6 +70,8 @@ def main():
         shape = builder.insert_image(f.name)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
+        st.write(os.stat("out.png"))
+
         path = os.path.join(".", "out.png")
         
         img = Image.open(path)
