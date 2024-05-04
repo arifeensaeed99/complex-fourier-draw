@@ -83,8 +83,10 @@ def main():
         
         shape = builder.insert_image(svg_file)
         shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
-            
-        img = Image.open('out.png')
+
+        path = os.join(".", "out.png")
+
+        img = Image.open(path)
 
         st.image(img, caption='Uploaded')
 
