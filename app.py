@@ -95,6 +95,8 @@ def main():
 
         path = os.join(".", "out.png")
 
+        st.image("out.png")
+
         img = Image.open(path)
 
         st.image(img, caption='Uploaded')
