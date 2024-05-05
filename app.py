@@ -60,6 +60,8 @@ def main():
 
     svg_file = st.file_uploader("Upload:", type=["svg"])
 
+    st.info("See and use examples here: https://drive.google.com/drive/u/0/folders/19-wJilF7InSDjQY53rwM4XZ4CLiBZoHJ")
+
     if svg_file is not None:
         
         doc = aw.Document()
@@ -259,7 +261,7 @@ def main():
                             
             with st.spinner("Compiling animation..."):
 
-                @ st.cache_data():
+                @ st.cache_data()
                 def compile():
                     images = []
                     for i in range(len(fourier)):
