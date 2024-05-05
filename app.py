@@ -13,7 +13,7 @@ from sklearn.metrics import pairwise_distances
 def main(): 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
-    if st.button("Under the hood"):
+    if st.button("Under the hood (math)"):
 
         st.header("The discrete fourier transform")
 
@@ -156,7 +156,7 @@ def main():
             # animate
             st.header("Epicycle Animation")
 
-            st.info("Finally, wait for your animation. This will take between 2, 5 or 10 minutes depending on selected detail, but will be worth it! ⭐")
+            st.info("Finally, wait for your animation. This will take around 2, 5, or 10 minutes depending on selected detail, but will be worth it! ⭐")
 
             with st.spinner("Creating animation..."):
   
