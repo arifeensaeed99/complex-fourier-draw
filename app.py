@@ -10,7 +10,6 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
-@ st.cache_data(ttl = 900, experimental_allow_widgets=True)
 def main():
     
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
@@ -201,59 +200,61 @@ def main():
                 # animation
     
                 # corrected epicycle alignment
-    
-                for i in range(len(fourier)):
-                
-                    t = i * (2 * np.pi / len(fourier))
+
+                @ st.cache_data()
+                def animate():
+                    for i in range(len(fourier)):
                     
-                    for idx in range(len(fourier)-1):        
-    
-                        if idx == 0:
+                        t = i * (2 * np.pi / len(fourier))
+                        
+                        for idx in range(len(fourier)-1):        
+        
+                            if idx == 0:
+                                
+                                radius = fourier[0]['amp']
+        
+                                freq = fourier[0]['freq']
+        
+                                phase = fourier[0]['phase']
+        
+                                x = radius * np.cos(t * freq + phase)
+        
+                                y = radius * np.sin(t * freq + phase)
+        
+                                patches[0].center = (x, y)
+        
+                            else:
+        
+                                prev_x, prev_y = patches[idx].center
+        
+                                radius = fourier[idx]['amp']
+        
+                                freq = fourier[idx]['freq']
+        
+                                phase = fourier[idx]['phase']
+        
+                                x = prev_x + radius * np.cos(t * freq + phase)
+        
+                                y = prev_y + radius * np.sin(t * freq + phase)
+        
+                                patches[idx + 1].center = (x, y)
+        
+                        # add values to x and y holders of final patch for drawing
                             
-                            radius = fourier[0]['amp']
-    
-                            freq = fourier[0]['freq']
-    
-                            phase = fourier[0]['phase']
-    
-                            x = radius * np.cos(t * freq + phase)
-    
-                            y = radius * np.sin(t * freq + phase)
-    
-                            patches[0].center = (x, y)
-    
-                        else:
-    
-                            prev_x, prev_y = patches[idx].center
-    
-                            radius = fourier[idx]['amp']
-    
-                            freq = fourier[idx]['freq']
-    
-                            phase = fourier[idx]['phase']
-    
-                            x = prev_x + radius * np.cos(t * freq + phase)
-    
-                            y = prev_y + radius * np.sin(t * freq + phase)
-    
-                            patches[idx + 1].center = (x, y)
-    
-                    # add values to x and y holders of final patch for drawing
+                        xdata.append( x )
+        
+                        ydata.append( y )
+        
+                        line.set_data(xdata, ydata)
                         
-                    xdata.append( x )
+                        fig.savefig(str(i) + '.png')
+        
+                        # print progress
     
-                    ydata.append( y )
+                        if i % (len(fourier) // 5) == 0 and i > 0:
     
-                    line.set_data(xdata, ydata)
-                    
-                    fig.savefig(str(i) + '.png')
-    
-                    # print progress
-
-                    if i % (len(fourier) // 5) == 0 and i > 0:
-
-                        st.write(str ( round ( i * 100 / len(fourier), 2 )  ) + "% complete...")
-                        
+                            st.write(str ( round ( i * 100 / len(fourier), 2 )  ) + "% complete...")
+                            
             with st.spinner("Compiling animation..."):
 
                 images = []
