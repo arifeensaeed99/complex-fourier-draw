@@ -11,8 +11,6 @@ from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
 def main():
-
-    st.session_state.clear()
     
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
