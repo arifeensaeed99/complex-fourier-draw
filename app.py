@@ -76,7 +76,7 @@ def main():
         # preprocessing
 
         # resize
-        if img.size[0] > 300 and img.size[1] > 300:
+        if img.size[0] > 300 or img.size[1] > 300:
             img = img.resize((300, 300))
 
         # find contours
