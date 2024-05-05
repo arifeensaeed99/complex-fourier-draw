@@ -152,14 +152,14 @@ def main():
                     return eval(pprint.pformat(sorted(X, key = lambda z: z['amp'], reverse=True))) # sorted by amp
                 fourier = dft(z)
                 st.success("Discrete fourier coefficients computed!")
-        
+
             # animate
             st.header("Epicycle Animation")
-            
-            with st.spinner("Creating animation..."):
 
-                st.info("Finally, wait for your animation. This takes a few minutes, but will be worth it! ⭐")
-                    
+            st.info("Finally, wait for your animation. This will take some time, but it will be worth it! ⭐")
+
+            with st.spinner("Creating animation..."):
+  
                 # blank window
                 fig = plt.figure()
                 fig.set_dpi(100)
@@ -192,7 +192,7 @@ def main():
                 xdata, ydata = [], []
     
                 init()
-        
+    
                 # animation
     
                 # corrected epicycle alignment
@@ -242,10 +242,12 @@ def main():
                     line.set_data(xdata, ydata)
                     
                     fig.savefig(str(i) + '.png')
+    
+                    # print progress
 
-                    if i % len(fourier) / 5 == 0:
+                    if i % (len(fourier) / 5) == 0 and i > 0:
 
-                        st.success( str (round (i * 100 / len(fourier), 2) ) + "% complete...")
+                        st.success(str(i * 100 / len(fourier) ) + "% complete...")
                         
             with st.spinner("Compiling animation..."):
 
