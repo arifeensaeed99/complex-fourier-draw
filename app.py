@@ -156,7 +156,7 @@ def main():
             # animate
             st.header("Epicycle Animation")
 
-            st.info("Finally, wait for your animation. This will take some time, but it will be worth it! ⭐")
+            st.info("Finally, wait for your animation. This usually takes 1, 5, or 10 minutes depending on selected difficulty, but it will be worth it! ⭐")
 
             with st.spinner("Creating animation..."):
   
@@ -242,12 +242,6 @@ def main():
                     line.set_data(xdata, ydata)
                     
                     fig.savefig(str(i) + '.png')
-    
-                    # print progress
-
-                    if i % (len(fourier) / 5) == 0 and i > 0:
-
-                        st.text(str(i * 100 / len(fourier) ) + "% complete...")
                         
             with st.spinner("Compiling animation..."):
 
