@@ -152,47 +152,47 @@ def main():
                     return eval(pprint.pformat(sorted(X, key = lambda z: z['amp'], reverse=True))) # sorted by amp
                 fourier = dft(z)
                 st.success("Discrete fourier coefficients computed!")
-
+        
             # animate
             st.header("Epicycle Animation")
 
             st.info("Finally, wait for your animation. This takes a few minutes, but will be worth it! ⭐")
-  
-            # blank window
-            fig = plt.figure()
-            fig.set_dpi(100)
-            fig.set_size_inches(8, 8)
-            ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
-            ax.set_xticks([])
-            ax.set_yticks([])
-            plt.title("https://complex-fourier-draw.streamlit.app")
-            plt.text("By: fahminstitute.org") 
-
-            # epicycles 
-            # (add arrows next)
-
-            # initialize
-            patches = []
-            for i in range(len(fourier)):
-                patches.append(plt.Circle((0, 0), fourier[i]['amp'], fill = False))
-
-            # final drawing line
-            line, = ax.plot([], [], lw = 2)
-            patches.append(line) # important
-
-            def init():
-                for p in patches[:-1]:
-                    ax.add_artist(p)
-                line.set_data([], [])
-                return patches
-
-            # init empty values for x and y coordinates for final drawing line
-            xdata, ydata = [], []
-
-            init()
-
+            
             with st.spinner("Creating animation..."):
+                    
+                # blank window
+                fig = plt.figure()
+                fig.set_dpi(100)
+                fig.set_size_inches(8, 8)
+                ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
+                ax.set_xticks([])
+                ax.set_yticks([])
+                plt.title("https://complex-fourier-draw.streamlit.app")
+                plt.text("By: fahminstitute.org") 
     
+                # epicycles 
+                # (add arrows next)
+    
+                # initialize
+                patches = []
+                for i in range(len(fourier)):
+                    patches.append(plt.Circle((0, 0), fourier[i]['amp'], fill = False))
+    
+                # final drawing line
+                line, = ax.plot([], [], lw = 2)
+                patches.append(line) # important
+    
+                def init():
+                    for p in patches[:-1]:
+                        ax.add_artist(p)
+                    line.set_data([], [])
+                    return patches
+    
+                # init empty values for x and y coordinates for final drawing line
+                xdata, ydata = [], []
+    
+                init()
+        
                 # animation
     
                 # corrected epicycle alignment
