@@ -242,6 +242,10 @@ def main():
                     line.set_data(xdata, ydata)
                     
                     fig.savefig(str(i) + '.png')
+
+                    if i % len(fourier) / 5 == 0:
+
+                        st.success( str (round (i * 100 / len(fourier), 2) ) + "% complete...")
                         
             with st.spinner("Compiling animation..."):
 
