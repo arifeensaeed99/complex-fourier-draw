@@ -247,7 +247,7 @@ def main():
 
                     if i % (len(fourier) // 5) == 0 and i > 0:
 
-                        st.success(str ( round ( i * 100 / len(fourier), 2 )  ) + "% complete...")
+                        st.write(str ( round ( i * 100 / len(fourier), 2 )  ) + "% complete...")
                         
             with st.spinner("Compiling animation..."):
 
