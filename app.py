@@ -155,10 +155,10 @@ def main():
         
             # animate
             st.header("Epicycle Animation")
-
-            st.info("Finally, wait for your animation. This takes a few minutes, but will be worth it! ⭐")
             
             with st.spinner("Creating animation..."):
+
+                st.info("Finally, wait for your animation. This takes a few minutes, but will be worth it! ⭐")
                     
                 # blank window
                 fig = plt.figure()
