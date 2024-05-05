@@ -77,21 +77,21 @@ def main():
             img = Image.open(bio)
             
         st.image(img, caption = "Uploaded")
+        st.write(img.size)
 
         # preprocessing
 
         # resize w/ aspect ratio
         if img.size[0] > 300 or img.size[1] > 300:
-            st.write(img.size)
             fract = img.size[0] / (img.size[0] + img.size[1])
             img = img.resize((round(300 * fract), round(300 * (1 - fract))))
-            st.write(img.size)
             
         # find contours
         img = img.filter(ImageFilter.CONTOUR)
 
         st.image(img, caption = "Processed")
-
+        st.write(img.size)
+        
         st.info("Now, imagine you were about to hand-draw the image. To *PROPERLY* draw it, how much time would you need?")
 
         detail = st.radio(label = "Detail:", options=['Low', "Medium", 'High'], index = 1 )
