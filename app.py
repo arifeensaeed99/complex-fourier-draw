@@ -245,9 +245,9 @@ def main():
     
                     # print progress
 
-                    if i % (len(fourier) / 5) == 0 and i > 0:
+                    if i % (len(fourier) // 5) == 0 and i > 0:
 
-                        st.success(str(i * 100 / len(fourier) ) + "% complete...")
+                        st.success(str ( round ( i * 100 / len(fourier), 2 )  ) + "% complete...")
                         
             with st.spinner("Compiling animation..."):
 
