@@ -80,10 +80,11 @@ def main():
 
         # preprocessing
 
-        # resize
+        # resize w/ aspect ratio
         if img.size[0] > 300 or img.size[1] > 300:
-            img = img.resize((300, 300))
-
+            fract = img.size[0] / (img.size[0] + img.size[1])
+            img = img.resize((round(300 * fract), round(300 * (1 - fract))))
+            
         # find contours
         img = img.filter(ImageFilter.CONTOUR)
 
