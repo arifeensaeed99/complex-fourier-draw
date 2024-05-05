@@ -10,12 +10,8 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
-@ st.cache_data(ttl = 900)
-def main(): 
-
-    for key in st.session_state:
-        st.write(key)
-        st.session_state.pop(key)
+@ st.cache_data(ttl = 900, experimental_allow_widgets=True)
+def main():
     
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
