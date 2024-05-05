@@ -167,8 +167,8 @@ def main():
                 ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
                 ax.set_xticks([])
                 ax.set_yticks([])
-                plt.title("https://complex-fourier-draw.streamlit.app")
-                plt.text("By: fahminstitute.org") 
+                plt.suptitle("https://complex-fourier-draw.streamlit.app")
+                plt.title("By: fahminstitute.org") 
     
                 # epicycles 
                 # (add arrows next)
