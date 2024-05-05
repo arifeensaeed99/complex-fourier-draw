@@ -84,9 +84,9 @@ def main():
 
         st.image(img, caption = "Processed")
 
-        st.info("Now, imagine you were about to hand-draw the image. To properly draw it, how much time would you need?")
+        st.info("Now, imagine you were about to hand-draw the image. To *PROPERLY* draw it, how much time would you need?")
 
-        complexity = st.radio(label = "Difficulty:", options=['Low', "Medium", 'High'], index = 1 )
+        detail = st.radio(label = "Detail:", options=['Low', "Medium", 'High'], index = 1 )
         st.caption("*If unsure, leave as Medium*")
         
         if st.button("Let's draw using math!"):
@@ -98,19 +98,19 @@ def main():
                 # print(xy_coords, len(xy_coords))
 
                 # Mean Shift
-                if complexity == 'Low':
+                if detail == 'Low':
                     start = 3
                     stop = 5
                     step = 0.25
                     points = 500
 
-                if complexity == 'Medium':
+                if detail == 'Medium':
                     start = 2
                     stop = 4
                     step = 0.25
                     points = 1300
 
-                elif complexity == 'High':
+                elif detail == 'High':
                     start = 1
                     stop = 3
                     step = 0.25
@@ -156,7 +156,7 @@ def main():
             # animate
             st.header("Epicycle Animation")
 
-            st.info("Finally, wait for your animation. This will take some time, but it will be worth it! ⭐")
+            st.info("Finally, wait for your animation. This will take between 2, 5 or 10 minutes depending on selected detail, but will be worth it! ⭐")
 
             with st.spinner("Creating animation..."):
   
