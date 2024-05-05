@@ -52,7 +52,7 @@ def main():
 
     st.info("Convert an image to SVG using: https://picsvg.com")
 
-    st.info("Or, browse sample gifs and SVGs: https://drive.google.com/drive/u/0/folders/19-wJilF7InSDjQY53rwM4XZ4CLiBZoHJ")
+    st.info("Or, browse sample gifs, and SVGs to use: https://drive.google.com/drive/u/0/folders/19-wJilF7InSDjQY53rwM4XZ4CLiBZoHJ")
 
     st.caption("*Why? A 2D b&w line art style is required for drawing*")
     
@@ -287,6 +287,8 @@ def main():
             st.caption("")
 
             st.caption("Finally, if unhappy with output, try again with higher detail")
+
+            st.session_state.clear()
 
     st.caption("")
     st.caption("")
