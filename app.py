@@ -85,6 +85,7 @@ def main():
             st.write(img.size)
             fract = img.size[0] / (img.size[0] + img.size[1])
             img = img.resize((round(300 * fract), round(300 * (1 - fract))))
+            st.write(img.size)
             
         # find contours
         img = img.filter(ImageFilter.CONTOUR)
