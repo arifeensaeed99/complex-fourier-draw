@@ -10,6 +10,7 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
+@ st.cache_data(ttl = 900)
 def main(): 
 
     for key in st.session_state:
@@ -92,7 +93,7 @@ def main():
         st.image(img, caption = "Processed")
         st.write(img.size)
         
-        st.info("Now, imagine you were about to hand-draw the image. To *PROPERLY* draw it, how much time would you need?")
+        st.info("Now, imagine you were about to hand-draw the image. What level of detail would be needed to *PROPERLY* draw it?")
 
         detail = st.radio(label = "Detail:", options=['Low', "Medium", 'High'], index = 1 )
         st.caption("*If unsure, leave as Medium*")
@@ -164,7 +165,7 @@ def main():
             # animate
             st.header("Epicycle Animation")
 
-            st.info("Finally, wait for your animation. This will take around 2, 5, or 10 minutes depending on selected detail, but will be worth it! ⭐")
+            st.info("Finally, wait for your animation. This will take around 1 to 5 minutes depending on selected detail and image, but will be worth it! ⭐")
 
             with st.spinner("Creating animation..."):
   
