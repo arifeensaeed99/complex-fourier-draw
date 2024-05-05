@@ -167,7 +167,7 @@ def main():
                 ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
                 ax.set_xticks([])
                 ax.set_yticks([])
-                plt.suptitle("https://complex-fourier-draw.streamlit.app")
+                plt.suptitle("complex-fourier-draw.streamlit.app")
                 plt.title("By: fahminstitute.org") 
     
                 # epicycles 
@@ -277,6 +277,10 @@ def main():
             st.image('output.gif')
 
             st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
+
+            st.caption("")
+
+            st.caption("Finally, if unhappy with output, try again with higher detail")
 
     st.caption("")
     st.caption("")
