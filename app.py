@@ -203,64 +203,60 @@ def main():
     
                 # corrected epicycle alignment
 
-                @st.cache_data()
-                def calculate():
-                    for i in range(len(fourier)):
+                for i in range(len(fourier)):
+                
+                    t = i * (2 * np.pi / len(fourier))
                     
-                        t = i * (2 * np.pi / len(fourier))
-                        
-                        for idx in range(len(fourier)-1):        
-        
-                            if idx == 0:
-                                
-                                radius = fourier[0]['amp']
-        
-                                freq = fourier[0]['freq']
-        
-                                phase = fourier[0]['phase']
-        
-                                x = radius * np.cos(t * freq + phase)
-        
-                                y = radius * np.sin(t * freq + phase)
-        
-                                patches[0].center = (x, y)
-        
-                            else:
-        
-                                prev_x, prev_y = patches[idx].center
-        
-                                radius = fourier[idx]['amp']
-        
-                                freq = fourier[idx]['freq']
-        
-                                phase = fourier[idx]['phase']
-        
-                                x = prev_x + radius * np.cos(t * freq + phase)
-        
-                                y = prev_y + radius * np.sin(t * freq + phase)
-        
-                                patches[idx + 1].center = (x, y)
-        
-                        # add values to x and y holders of final patch for drawing
-                            
-                        xdata.append( x )
-        
-                        ydata.append( y )
-        
-                        line.set_data(xdata, ydata)
-                        
-                        fig.savefig(str(i) + '.png')
-        
-                        # print progress
+                    for idx in range(len(fourier)-1):        
     
-                        if i % (len(fourier) // 5) == 0 and i > 0:
-    
-                            st.write(str ( round ( i * 100 / len(fourier), 2 )  ) + "% complete...")
+                        if idx == 0:
                             
+                            radius = fourier[0]['amp']
+    
+                            freq = fourier[0]['freq']
+    
+                            phase = fourier[0]['phase']
+    
+                            x = radius * np.cos(t * freq + phase)
+    
+                            y = radius * np.sin(t * freq + phase)
+    
+                            patches[0].center = (x, y)
+    
+                        else:
+    
+                            prev_x, prev_y = patches[idx].center
+    
+                            radius = fourier[idx]['amp']
+    
+                            freq = fourier[idx]['freq']
+    
+                            phase = fourier[idx]['phase']
+    
+                            x = prev_x + radius * np.cos(t * freq + phase)
+    
+                            y = prev_y + radius * np.sin(t * freq + phase)
+    
+                            patches[idx + 1].center = (x, y)
+    
+                    # add values to x and y holders of final patch for drawing
+                        
+                    xdata.append( x )
+    
+                    ydata.append( y )
+    
+                    line.set_data(xdata, ydata)
+                    
+                    fig.savefig(str(i) + '.png')
+    
+                    # print progress
+
+                    if i % (len(fourier) // 5) == 0 and i > 0:
+
+                        st.write(str ( round ( i * 100 / len(fourier), 2 )  ) + "% complete...")
+                        
             with st.spinner("Compiling animation..."):
 
-                @ st.cache_data()
-                def compile():
                     images = []
                     for i in range(len(fourier)):
                         
@@ -278,19 +274,19 @@ def main():
     
                     st.caption("(right click to download the gif)")
 
-                    # removing temp files
-                    for i in range(len(fourier)):
-                        
-                        os.remove(str(i)+'.png')
-                    
-                    # show gif
-                    st.image('output.gif')
-        
-                    st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
-        
-                    st.caption("")
-        
-                    st.caption("Finally, if unhappy with output, try again with higher detail")
+            # removing temp files
+            for i in range(len(fourier)):
+                
+                os.remove(str(i)+'.png')
+            
+            # show gif
+            st.image('output.gif')
+
+            st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
+
+            st.caption("")
+
+            st.caption("Finally, if unhappy with output, try again with higher detail")
 
     st.caption("")
     st.caption("")
