@@ -203,8 +203,8 @@ def main():
     
                 # corrected epicycle alignment
 
-                @ st.cache_data()
-                def animate():
+                @st.cache_data()
+                def calculate():
                     for i in range(len(fourier)):
                     
                         t = i * (2 * np.pi / len(fourier))
@@ -259,36 +259,38 @@ def main():
                             
             with st.spinner("Compiling animation..."):
 
-                images = []
-                for i in range(len(fourier)):
+                @ st.cache_data():
+                def compile():
+                    images = []
+                    for i in range(len(fourier)):
+                        
+                        exec('a'+str(i)+'=Image.open("'+str(i)+'.png")')
+                        images.append(eval('a'+str(i)))
                     
-                    exec('a'+str(i)+'=Image.open("'+str(i)+'.png")')
-                    images.append(eval('a'+str(i)))
-                
-                images[0].save('output.gif',
-                            save_all = True,
-                            append_images = images[1:],
-                            duration = 120,
-                            loop = 1)
+                    images[0].save('output.gif',
+                                save_all = True,
+                                append_images = images[1:],
+                                duration = 120,
+                                loop = 1)
+    
+                    st.balloons()
+                    st.success("Animation ready! 😊")
+    
+                    st.caption("(right click to download the gif)")
 
-                st.balloons()
-                st.success("Animation ready! 😊")
-
-                st.caption("(right click to download the gif)")
-
-            # removing temp files
-            for i in range(len(fourier)):
-                
-                os.remove(str(i)+'.png')
-            
-            # show gif
-            st.image('output.gif')
-
-            st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
-
-            st.caption("")
-
-            st.caption("Finally, if unhappy with output, try again with higher detail")
+                    # removing temp files
+                    for i in range(len(fourier)):
+                        
+                        os.remove(str(i)+'.png')
+                    
+                    # show gif
+                    st.image('output.gif')
+        
+                    st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
+        
+                    st.caption("")
+        
+                    st.caption("Finally, if unhappy with output, try again with higher detail")
 
     st.caption("")
     st.caption("")
