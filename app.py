@@ -50,15 +50,15 @@ def main():
 
         st.subheader("Main App")
 
-    st.info("First, convert your image to SVG using: https://picsvg.com")
+    st.info("Convert an image to SVG using: https://picsvg.com")
+
+    st.info("Or, browse sample gifs and SVGs: https://drive.google.com/drive/u/0/folders/19-wJilF7InSDjQY53rwM4XZ4CLiBZoHJ")
 
     st.caption("*Why? A 2D b&w line art style is required for drawing*")
-
-    st.info("Then, upload your SVG:")
+    
+    st.info("Upload an SVG:")
 
     svg_file = st.file_uploader("Upload:", type=["svg"])
-
-    st.info("See and use examples here: https://drive.google.com/drive/u/0/folders/19-wJilF7InSDjQY53rwM4XZ4CLiBZoHJ")
 
     if svg_file is not None:
         
