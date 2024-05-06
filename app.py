@@ -123,7 +123,7 @@ def main():
                     start = 1.5
                     stop = 3.5
                     step = 0.25
-                    points = 1350 # memory cap (next: increase)
+                    points = 1500 # memory cap (next: increase)
 
                 for b in np.arange(start, stop, step):
                     xy_coords, labels = mean_shift(xy_coords, bandwidth = b)
