@@ -14,11 +14,6 @@ from sklearn.metrics import pairwise_distances
 
 def main():
 
-    # random string for this session
-    rand_str = ''.join(random.choices(string.ascii_lowercase +
-                             string.digits, k=5))
-    st.write(rand_str)
-
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
     if st.button("Under the hood (math)"):
@@ -72,10 +67,10 @@ def main():
         doc = aw.Document()
         builder = aw.DocumentBuilder(doc)
         shape = builder.insert_image(svg_file)
-        shape.get_shape_renderer().save(rand_str + "out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
+        shape.get_shape_renderer().save("out.png", aw.saving.ImageSaveOptions(aw.SaveFormat.PNG))
 
         ImageFile.LOAD_TRUNCATED_IMAGES = True
-        path = rand_str + 'out.png'
+        path = 'out.png'
         with open(path, 'rb') as fp:
             image_data = fp.read()
             bio = BytesIO(image_data)
@@ -254,7 +249,7 @@ def main():
     
                     line.set_data(xdata, ydata)
                     
-                    fig.savefig(rand_str +  str(i) + '.png')
+                    fig.savefig(str(i) + '.png')
     
                     # print progress
 
@@ -268,11 +263,11 @@ def main():
 
                 for i in range(len(fourier)):
                         
-                        exec(rand_str+'a'+str(i)+'=Image.open("'+rand_str + str(i)+'.png")')
+                        exec('a'+str(i)+'=Image.open("'+ str(i)+'.png")')
                         images.append(eval('a'+str(i)))
 
                 # Save the GIF
-                images[0].save(rand_str + 'output.gif',
+                images[0].save('output.gif',
                                        save_all=True,
                                        append_images=images[1:],
                                        duration=5, # speed
@@ -285,12 +280,12 @@ def main():
                 st.caption("(right click to download the gif)")
 
             # show gif
-            st.image(rand_str + 'output.gif')
+            st.image('output.gif')
             
             # removing temp files
             for i in range(len(fourier)):
                 
-                os.remove(rand_str + str(i)+'.png')
+                os.remove(str(i)+'.png')
 
             # st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
