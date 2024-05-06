@@ -11,14 +11,13 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
+# prevent data leakage
+temp_dir = tempfile.TemporaryDirectory()
+os.chdir(temp_dir.name)
+
+st.write(temp_dir, temp_dir.name)
+
 def main():
-
-    # prevent data leakage
-    temp_dir = tempfile.TemporaryDirectory()
-    os.chdir(temp_dir.name)
-
-    st.write(temp_dir, temp_dir.name)
-    
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
     if st.button("Under the hood (math)"):
