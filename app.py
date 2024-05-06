@@ -87,6 +87,7 @@ def main():
         # preprocessing
 
         # resize w/ aspect ratio
+        # (next: edit size)
         if img.size[0] > 300 or img.size[1] > 300:
             fract = img.size[0] / (img.size[0] + img.size[1])
             img = img.resize((round(300 * fract), round(300 * (1 - fract))))
@@ -127,7 +128,7 @@ def main():
                     start = 1.5
                     stop = 3.5
                     step = 0.25
-                    points = 1350 # ensure this is good
+                    points = 1350 # memory cap (next: increase)
 
                 for b in np.arange(start, stop, step):
                     xy_coords, labels = mean_shift(xy_coords, bandwidth = b)
@@ -169,7 +170,7 @@ def main():
             # animate
             st.header("Epicycle Animation")
 
-            st.info("Finally, wait for your animation. This could take around 1 to 5 minutes depending on selected detail and image, but will be worth it! ⭐")
+            st.info("Finally, wait for your animation. This could take around 1-5 minutes depending on selected detail, but will be worth it! ⭐")
 
             with st.spinner("Creating animation..."):
   
@@ -180,7 +181,7 @@ def main():
                 ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
                 ax.set_xticks([])
                 ax.set_yticks([])
-                plt.title("complex-fourier-draw.streamlit.app")
+                plt.suptitle("complex-fourier-draw.streamlit.app")
                 
                 # epicycles 
                 # (next: add arrows)
@@ -253,11 +254,11 @@ def main():
     
                     line.set_data(xdata, ydata)
                     
-                    fig.savefig(temp_dir.name + str(i) + '.png')
+                    fig.savefig(temp_dir.name + "/" + str(i) + '.png')
     
                     # print progress
 
-                    if i % (len(fourier) // 5) == 0 and i > 0:
+                    if i % (len(fourier) // 5) == 0 and i > 0: # every 5th progress
 
                         st.write(str ( round ( i * 100 / len(fourier), 2 )  ) + "% completed...")
                         
@@ -267,7 +268,7 @@ def main():
 
                 for i in range(len(fourier)):
                         
-                        exec('a'+str(i)+'=Image.open("'+temp_dir.name+str(i)+'.png")')
+                        exec('a'+str(i)+'=Image.open("'+temp_dir.name+"/"+str(i)+'.png")')
                         images.append(eval('a'+str(i)))
 
                 # Save the GIF
@@ -275,7 +276,7 @@ def main():
                                        save_all=True,
                                        append_images=images[1:],
                                        duration=5, # speed
-                                       loop=0)
+                                       loop=1) # only one repeat (memory)
 
                
                 st.balloons()
@@ -284,25 +285,21 @@ def main():
                 st.caption("(right click to download the gif)")
 
             # show gif
-            st.image(temp_dir.name + 'output.gif')
+            st.image(temp_dir.name + "/" + 'output.gif')
             
             # removing temp files
             for i in range(len(fourier)):
                 
-                os.remove(temp_dir.name + str(i)+'.png')
+                os.remove(temp_dir.name + "/" + str(i)+'.png')
 
-            st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
-
-            st.caption("")
-
-            st.caption("If higher quality needed, contact us")
+            # st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
     st.caption("")
     st.caption("")
     st.caption("")
     st.caption("")
     st.caption("*Expanding Artificial Intelligence with the Guidance of Islam*")
-    st.caption("Fahm Institute © 2024 | http://www.fahminstitute.org")
+    st.caption("http://www.fahminstitute.org ©")
     
 if __name__ == '__main__':
     main()
