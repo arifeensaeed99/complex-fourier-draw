@@ -12,9 +12,9 @@ from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
 def main():
-    # prevent data leakage
-    temp_dir = tempfile.TemporaryDirectory()
-    os.chdir(temp_dir.name)
+    # prevent data leakage ?
+    # temp_dir = tempfile.TemporaryDirectory()
+    # os.chdir(temp_dir.name)
 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
@@ -251,7 +251,7 @@ def main():
     
                     line.set_data(xdata, ydata)
                     
-                    fig.savefig(temp_dir.name + "/" + str(i) + '.png')
+                    fig.savefig( str(i) + '.png')
     
                     # print progress
 
@@ -265,11 +265,11 @@ def main():
 
                 for i in range(len(fourier)):
                         
-                        exec('a'+str(i)+'=Image.open("'+temp_dir.name+"/"+str(i)+'.png")')
+                        exec('a'+str(i)+'=Image.open("'+str(i)+'.png")')
                         images.append(eval('a'+str(i)))
 
                 # Save the GIF
-                images[0].save(temp_dir.name + "/" + 'output.gif',
+                images[0].save('output.gif',
                                        save_all=True,
                                        append_images=images[1:],
                                        duration=5, # speed
@@ -282,12 +282,12 @@ def main():
                 st.caption("(right click to download the gif)")
 
             # show gif
-            st.image(temp_dir.name + "/" + 'output.gif')
+            st.image('output.gif')
             
             # removing temp files
             for i in range(len(fourier)):
                 
-                os.remove(temp_dir.name + "/" + str(i)+'.png')
+                os.remove(str(i)+'.png')
 
             # st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
@@ -296,7 +296,7 @@ def main():
     st.caption("")
     st.caption("")
     st.caption("*Expanding Artificial Intelligence with the Guidance of Islam*")
-    st.caption("http://www.fahminstitute.org ©")
+    st.caption("http://www.fahminstitute.org")
     
 if __name__ == '__main__':
     main()
