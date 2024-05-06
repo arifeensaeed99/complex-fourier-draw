@@ -96,7 +96,7 @@ def main():
         st.info("Now, imagine you were about to hand-draw the image. What level of detail would you need to *PROPERLY* draw it?")
 
         detail = st.radio(label = "Detail:", options=['Low', "Medium", 'High'], index = 1 )
-        st.caption("*If unsure, leave as Medium*")
+        st.caption("*Do not use Low unless the image is VERY simple*")
         
         if st.button("Let's draw using math!"):
 
@@ -162,6 +162,9 @@ def main():
                 fourier = dft(z)
                 st.success("Discrete fourier coefficients computed!")
 
+            # random str for anim
+            rand_str = "".join((random.choice(string.ascii_lowercase) for x in range(5)))
+            
             # animate
             st.header("Epicycle Animation")
 
@@ -249,7 +252,7 @@ def main():
     
                     line.set_data(xdata, ydata)
                     
-                    fig.savefig(str(i) + '.png')
+                    fig.savefig(rand_str + str(i) + '.png')
     
                     # print progress
 
@@ -263,11 +266,11 @@ def main():
 
                 for i in range(len(fourier)):
                         
-                        exec('a'+str(i)+'=Image.open("'+ str(i)+'.png")')
+                        exec('a'+str(i)+'=Image.open("'+ rand_str + str(i)+'.png")')
                         images.append(eval('a'+str(i)))
 
                 # Save the GIF
-                images[0].save('output.gif',
+                images[0].save(rand_str + 'output.gif',
                                        save_all=True,
                                        append_images=images[1:],
                                        duration=5, # speed
@@ -280,12 +283,12 @@ def main():
                 st.caption("(right click to download the gif)")
 
             # show gif
-            st.image('output.gif')
+            st.image(rand_str + 'output.gif')
             
             # removing temp files
             for i in range(len(fourier)):
                 
-                os.remove(str(i)+'.png')
+                os.remove(rand_str + str(i)+'.png')
 
             # st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
