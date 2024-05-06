@@ -3,6 +3,7 @@ import numpy as np
 import aspose.words as aw
 from io import BytesIO
 import os
+import tempfile
 from PIL import Image, ImageFilter, ImageFile
 import matplotlib.pyplot as plt
 import pprint
@@ -11,6 +12,10 @@ from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
 def main():
+
+    # prevent data leakage
+    temp_dir = tempfile.TemporaryDirectory()
+    os.chdir(temp_dir.name)
     
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
@@ -90,7 +95,7 @@ def main():
         st.image(img, caption = "Processed")
         st.write(img.size)
         
-        st.info("Now, imagine you were about to hand-draw the image. What level of detail would be needed to *PROPERLY* draw it?")
+        st.info("Now, imagine you were about to hand-draw the image. What level of detail would you need to *PROPERLY* draw it?")
 
         detail = st.radio(label = "Detail:", options=['Low', "Medium", 'High'], index = 1 )
         st.caption("*If unsure, leave as Medium*")
@@ -105,22 +110,22 @@ def main():
 
                 # Mean Shift
                 if detail == 'Low':
-                    start = 3
-                    stop = 5
+                    start = 3.5
+                    stop = 5.5
                     step = 0.25
-                    points = 400
+                    points = 450
 
                 if detail == 'Medium':
-                    start = 2
-                    stop = 4
+                    start = 2.5
+                    stop = 4.5
                     step = 0.25
-                    points = 1200
+                    points = 900
 
                 elif detail == 'High':
-                    start = 1
-                    stop = 3
+                    start = 1.5
+                    stop = 3.5
                     step = 0.25
-                    points = 2100
+                    points = 1350 # ensure this is good
 
                 for b in np.arange(start, stop, step):
                     xy_coords, labels = mean_shift(xy_coords, bandwidth = b)
@@ -174,10 +179,9 @@ def main():
                 ax.set_xticks([])
                 ax.set_yticks([])
                 plt.title("complex-fourier-draw.streamlit.app")
-                # plt.title("fahminstitute.org") 
-    
+                
                 # epicycles 
-                # (add arrows next)
+                # (next: add arrows)
     
                 # initialize
                 patches = []
@@ -268,7 +272,7 @@ def main():
                 images[0].save('output.gif',
                                        save_all=True,
                                        append_images=images[1:],
-                                       duration=5,
+                                       duration=5, # speed
                                        loop=0)
 
                
@@ -285,8 +289,6 @@ def main():
                 
                 os.remove(str(i)+'.png')
 
-            del images
-
             st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
             st.caption("")
@@ -297,9 +299,9 @@ def main():
     st.caption("")
     st.caption("")
     st.caption("")
-    st.caption("")
     st.caption("Fahm Institute © 2024")
-    st.caption("*-Arifeen S.*")
+    st.caption("*Expanding Artificial Intelligence with the Guidance of Islam*")
+    st.caption("http://www.fahminstitute.org")
     
 if __name__ == '__main__':
     main()
