@@ -168,7 +168,7 @@ def main():
             # animate
             st.header("Epicycle Animation")
 
-            st.info("Finally, wait for your animation. This could take around 1-5 minutes depending on selected detail, but will be worth it! ⭐")
+            st.info("Finally, wait for your animation. This could take around 1-5 minutes depending on selected detail and app demand, but will be worth it! ⭐")
 
             with st.spinner("Creating animation..."):
   
@@ -179,7 +179,7 @@ def main():
                 ax = plt.axes(xlim = (-300, 300), ylim = (-300, 300))
                 ax.set_xticks([])
                 ax.set_yticks([])
-                plt.title("complex-fourier-draw.streamlit.app")
+                plt.suptitle("complex-fourier-draw.streamlit.app")
                 
                 # epicycles 
                 # (next: add arrows)
@@ -290,7 +290,7 @@ def main():
                 
                 os.remove(rand_str + str(i)+'.png')
 
-            # st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
+            st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
     st.caption("")
     st.caption("")
