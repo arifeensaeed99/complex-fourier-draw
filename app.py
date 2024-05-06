@@ -108,19 +108,19 @@ def main():
                     start = 3
                     stop = 5
                     step = 0.25
-                    points = 500
+                    points = 400
 
                 if detail == 'Medium':
                     start = 2
                     stop = 4
                     step = 0.25
-                    points = 1300
+                    points = 1200
 
                 elif detail == 'High':
                     start = 1
                     stop = 3
                     step = 0.25
-                    points = 2300
+                    points = 2100
 
                 for b in np.arange(start, stop, step):
                     xy_coords, labels = mean_shift(xy_coords, bandwidth = b)
@@ -253,7 +253,7 @@ def main():
 
                     if i % (len(fourier) // 5) == 0 and i > 0:
 
-                        st.write(str ( round ( i * 100 / len(fourier), 2 )  ) + "% complete...")
+                        st.write(str ( round ( i * 100 / len(fourier), 2 )  ) + "% completed...")
                         
             with st.spinner("Compiling animation..."):
 
@@ -285,13 +285,13 @@ def main():
                 
                 os.remove(str(i)+'.png')
 
+            del images
+
             st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
             st.caption("")
 
             st.caption("Finally, if unhappy with output, try again with higher detail")
-
-            st.session_state.clear()
 
     st.caption("")
     st.caption("")
