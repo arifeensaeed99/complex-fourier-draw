@@ -11,13 +11,13 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
-# prevent data leakage
-temp_dir = tempfile.TemporaryDirectory()
-os.chdir(temp_dir.name)
-
-st.write(temp_dir, temp_dir.name)
-
 def main():
+    # prevent data leakage
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir.name)
+    
+        st.write(temp_dir, temp_dir.name)
+
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
     if st.button("Under the hood (math)"):
@@ -290,6 +290,8 @@ def main():
             for i in range(len(fourier)):
                 
                 os.remove(temp_dir.name + str(i)+'.png')
+
+            temp_dir.cleanup()
 
             # st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
