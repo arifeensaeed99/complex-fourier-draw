@@ -11,6 +11,15 @@ from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
 def main():
+
+    # make sure mprof is installed
+    pip install memory_profiler
+    
+    # find the pid of the Streamlit app (the next number after the user)
+    ps aux | grep "streamlit run" | grep -v grep
+    
+    # start profiling the memory of the app
+    mprof run --attach <pid>
     
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
@@ -162,7 +171,7 @@ def main():
             # animate
             st.header("Epicycle Animation")
 
-            st.info("Finally, wait for your animation. This will take around 1 to 5 minutes depending on selected detail and image, but will be worth it! ⭐")
+            st.info("Finally, wait for your animation. This could take around 1 to 5 minutes depending on selected detail and image, but will be worth it! ⭐")
 
             with st.spinner("Creating animation..."):
   
