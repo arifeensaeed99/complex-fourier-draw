@@ -13,8 +13,8 @@ from sklearn.metrics import pairwise_distances
 
 def main():
     # prevent data leakage
-    temp_dir = tempfile.TemporaryDirectory(dir = "/tmp")
-    os.chdir(temp_dir.name)
+    # temp_dir = tempfile.TemporaryDirectory(dir = "/tmp")
+    # os.chdir(temp_dir.name)
 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
@@ -265,11 +265,11 @@ def main():
 
                 for i in range(len(fourier)):
                         
-                        exec('a'+str(i)+'=Image.open("'+temp_dir.name+str(i)+'.png")')
+                        exec('a'+str(i)+'=Image.open("'+str(i)+'.png")')
                         images.append(eval('a'+str(i)))
 
                 # Save the GIF
-                images[0].save(temp_dir.name + 'output.gif',
+                images[0].save('output.gif',
                                        save_all=True,
                                        append_images=images[1:],
                                        duration=5, # speed
@@ -282,14 +282,12 @@ def main():
                 st.caption("(right click to download the gif)")
 
             # show gif
-            st.image(temp_dir.name + 'output.gif')
+            st.image('output.gif')
             
             # removing temp files
             for i in range(len(fourier)):
                 
-                os.remove(temp_dir.name + str(i)+'.png')
-
-            temp_dir.cleanup()
+                os.remove(str(i)+'.png')
 
             # st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
