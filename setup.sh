@@ -10,7 +10,5 @@ font = ‘sans serif’
 headless = true
 port = $PORT
 enableCORS = false
-fileWatcherType= 'poll'
-folderWatchBlacklist=[]
 
 " > ~/.streamlit/config.toml
