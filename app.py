@@ -13,10 +13,8 @@ from sklearn.metrics import pairwise_distances
 
 def main():
     # prevent data leakage
-    with tempfile.TemporaryDirectory() as temp_dir:
-        os.chdir(temp_dir.name)
-    
-        st.write(temp_dir, temp_dir.name)
+    temp_dir = tempfile.TemporaryDirectory(dir = "/tmp")
+    os.chdir(temp_dir.name)
 
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
