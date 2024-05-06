@@ -11,15 +11,6 @@ from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
 def main():
-
-    # make sure mprof is installed
-    pip install memory_profiler
-    
-    # find the pid of the Streamlit app (the next number after the user)
-    ps aux | grep "streamlit run" | grep -v grep
-    
-    # start profiling the memory of the app
-    mprof run --attach <pid>
     
     st.title("Draw using Complex Fourier Epicycles 🌑🌌")
 
