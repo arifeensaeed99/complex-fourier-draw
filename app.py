@@ -257,30 +257,33 @@ def main():
                         
             with st.spinner("Compiling animation..."):
 
-                    images = []
-                    for i in range(len(fourier)):
+                images = []
+
+                for i in range(len(fourier)):
                         
                         exec('a'+str(i)+'=Image.open("'+str(i)+'.png")')
                         images.append(eval('a'+str(i)))
-                    
-                    images[0].save('output.gif',
-                                save_all = True,
-                                append_images = images[1:],
-                                duration = 120,
-                                loop = 1)
-    
-                    st.balloons()
-                    st.success("Animation ready! 😊")
-    
-                    st.caption("(right click to download the gif)")
 
+                # Save the GIF
+                images[0].save('output.gif',
+                                       save_all=True,
+                                       append_images=images[1:],
+                                       duration=5,
+                                       loop=0)
+
+               
+                st.balloons()
+                st.success("Animation ready! 😊")
+        
+                st.caption("(right click to download the gif)")
+
+            # show gif
+            st.image('output.gif')
+            
             # removing temp files
             for i in range(len(fourier)):
                 
                 os.remove(str(i)+'.png')
-            
-            # show gif
-            st.image('output.gif')
 
             st.caption("If need be, use this tool to speed up your gif: https://onlinegiftools.com/make-gif-faster")
 
