@@ -296,8 +296,7 @@ def main():
     st.caption("")
     st.caption("")
     st.caption("")
-    st.caption("*Expanding Artificial Intelligence with the Guidance of Islam*")
-    st.caption("http://www.fahminstitute.org")
+    st.caption("*Made by: Arifeen Saeed*")
     
 if __name__ == '__main__':
     main()
