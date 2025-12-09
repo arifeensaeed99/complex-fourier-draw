@@ -1,4 +1,4 @@
-export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
+apt-get update && apt-get install -y libicu-dev
 
 mkdir -p ~/.streamlit/
 
