@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np
-import aspose.words as aw
 from io import BytesIO
 import os
 import random
@@ -11,6 +10,14 @@ import pprint
 import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
+
+os.environ["DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"] = "true"
+
+try:
+    import aspose.words as aw
+except Exception as e:
+    st.error(f"Failed to import necessary libraries: {e}")
+    st.stop()
 
 def main():
 
