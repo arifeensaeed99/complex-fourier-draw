@@ -6,4 +6,4 @@ fast-tsp==0.1.2
 scikit-learn==1.3.0
 stqdm==0.0.5
 
-aspose-words==24.4.0
+aspose-words==25.11.0
