@@ -3,6 +3,7 @@ import numpy as np
 from io import BytesIO
 import os
 import random
+import aspose.words as aw
 import string
 from PIL import Image, ImageFilter, ImageFile
 import matplotlib.pyplot as plt
@@ -10,14 +11,6 @@ import pprint
 import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
-
-os.environ["System.Globalization.Invariant"] = "true"
-
-try:
-    import aspose.words as aw
-except Exception as e:
-    st.error(f"Failed to import necessary libraries: {e}")
-    st.stop()
 
 def main():
 
