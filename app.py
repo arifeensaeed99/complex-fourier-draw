@@ -11,7 +11,7 @@ import fast_tsp
 from sklearn.cluster import mean_shift
 from sklearn.metrics import pairwise_distances
 
-os.environ["DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"] = "true"
+os.environ["SYSTEM_GLOBALIZATION_INVARIANT"] = "true"
 
 try:
     import aspose.words as aw
