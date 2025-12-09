@@ -1,3 +1,5 @@
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
+
 mkdir -p ~/.streamlit/
 
 echo "[theme]
