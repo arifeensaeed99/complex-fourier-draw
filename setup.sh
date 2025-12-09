@@ -1,5 +1,3 @@
-apt-get update && apt-get install -y libicu-dev
-
 mkdir -p ~/.streamlit/
 
 echo "[theme]
